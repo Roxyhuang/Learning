@@ -1,0 +1,1 @@
+http://dengo.org/archives/1031
