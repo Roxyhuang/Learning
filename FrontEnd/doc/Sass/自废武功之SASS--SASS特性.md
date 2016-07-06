@@ -93,3 +93,35 @@ CSS 提供了两种类型的字符串：
 
 
 注意：当 deprecated = property syntax 时，所有的字符串都将被编译为无引号字符串，不论是否使用了引号。
+
+
+
+
+所谓值列表 (lists) 是指 Sass 如何处理 CSS 中：
+
+
+	margin: 10px 15px 0 0
+
+或者：
+
+		font-face: Helvetica, Arial, sans-seri
+
+
+像上面这样通过空格或者逗号分隔的一系列的值。
+
+事实上，独立的值也被视为值列表——只包含一个值的值列表。
+
+
+Sass列表函数（Sass list functions）赋予了值列表更多功能：
+
+nth函数（nth function） 可以直接访问值列表中的某一项；
+
+join函数（join function） 可以将多个值列表连结在一起；
+
+append函数（append function） 可以在值列表中添加值；
+
+@each规则（@each rule） 则能够给值列表中的每个项目添加样式。
+
+　　值列表中可以再包含值列表，比如 1px 2px, 5px 6px 是包含 1px 2px 与 5px 6px 两个值列表的值列表。如果内外两层值列表使用相同的分隔方式，要用圆括号包裹内层，所以也可以写成 (1px 2px) (5px 6px)。当值列表被编译为 CSS 时，Sass 不会添加任何圆括号，因为 CSS 不允许这样做。(1px 2px) (5px 6px)与 1px 2px 5px 6px 在编译后的 CSS 文件中是一样的，但是它们在 Sass 文件中却有不同的意义，前者是包含两个值列表的值列表，而后者是包含四个值的值列表。
+
+　　可以用 () 表示空的列表，这样不可以直接编译成 CSS，比如编译 font-family: ()时，Sass 将会报错。如果值列表中包含空的值列表或空值，编译时将清除空值，比如 1px 2px () 3px 或 1px 2px null 3px。
