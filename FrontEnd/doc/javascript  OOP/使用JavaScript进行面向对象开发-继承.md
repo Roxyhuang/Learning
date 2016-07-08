@@ -101,7 +101,125 @@ JavaScript OOP开发 继承
 3、通过worker.apply(this,arguments)，相当于使用当前实例和当前参数列表执行了一次worker方法，也就意味着将当前实例和name，age进行了一次worker的构造。
 
 
-http://blog.csdn.net/business122/article/details/8000676
 
 
-http://www.w3school.com.cn/js/pro_js_syntax.asp
+
+
+
+
+
+
+
+
+
+
+最近最网上看了一个人面试淘宝时的经历，然后发现了自己有好多好多不太清楚的地方，所以特此写点文章来加深自己对一些问题的理解。
+文章中提到了一个问题是：JavaScript是如何实现继承的？
+
+下面我便阐述一些在网上找到的方法和实例来解释下，借以加深自己的印象。
+我们知道JavaScript中的function是万能的，除了用于的函数定义，也可以用于类的定义。
+JavaScript的继承，说起来也是有点怪，不像C++和一些面向对象的语言，他没有public,private等访问控制修饰，也没有implement或其他特定的符号来说明是实现继承。
+关于javascript类的继承可以参考一下下面的这个例子。
+复制代码 代码如下:
+
+<script type="text/javascript"> 
+function Person() {
+    // 属性 
+    this.Gender = "female";
+    this.Age = 18;
+    this.Words = "Silence";
+    // 方法
+    this.shouting = function() {
+        alert("开心哦！父类的方法");
+    }
+}
+// 继承
+function Programmer() {
+    this.base = Person;
+}
+Programmer.prototype = new Person;
+// 为子类添加新的方法
+Programmer.prototype.typeCode = function() {
+    alert("俺是敲代码的！IT民工，很不开心。子类的方法");
+}
+// 调用示例
+function sayHello() {
+    var a = new Programmer();
+    alert(a.Gender); // 调用父类的属性
+    a.shouting(); // 调用父类的方法
+    a.typeCode(); // 调用子类的方法
+}        
+sayHello();
+</script>
+上例中，首先是声明一个person类，里面包含了一些属性和方法，然后接着又声明了一个programmer类，其中有个base属性，这个属性并不是必需的，但是出于规范以及以后在查找对象所继承的类时都需要写上，然后是给programmer的原型对象（prototype）拷贝了person类；于是便实现了类的继承。
+模拟JavaScript中类和继承的一些原理
+在面向对象的语言中，我们使用类来创建一个自定义对象。然而JavaScript中所有事物都是对象，那么用什么办法来创建自定义对象呢？
+这就需要引入另外一个概念 - 原型（prototype），我们可以简单的把prototype看做是一个模版，新创建的自定义对象都是这个模版（prototype）的一个拷贝 （实际上不是拷贝而是链接，只不过这种链接是不可见，给人们的感觉好像是拷贝）。
+让我们看一下通过prototype创建自定义对象的一个例子：
+复制代码 代码如下:
+
+// 构造函数
+  function Person(name, sex) {
+      this.name = name;
+      this.sex = sex;
+  }
+  // 定义Person的原型，原型中的属性可以被自定义对象引用
+  Person.prototype = {
+      getName: function() {
+          return this.name;
+      },
+      getSex: function() {
+          return this.sex;
+      }
+  }
+这里我们把函数Person称为构造函数，也就是创建自定义对象的函数。可以看出，JavaScript通过构造函数和原型的方式模拟实现了类的功能。
+下面通过一个例子来具体阐述创建一个自定义对象，javascript所做的具体的工作：
+复制代码 代码如下:
+
+var zhang = new Person("ZhangSan", "man");
+console.log(zhang.getName()); // "ZhangSan"
+var chun = new Person("ChunHua", "woman");
+console.log(chun.getName()); // "ChunHua"
+当代码var zhang = new Person("ZhangSan", "man")执行时，其实内部做了如下几件事情：
+创建一个空白对象（new Object()）。
+拷贝Person.prototype中的属性（键值对）到这个空对象中（我们前面提到，内部实现时不是拷贝而是一个隐藏的链接）。
+将这个对象通过this关键字传递到构造函数中并执行构造函数。
+将这个对象赋值给变量zhang。
+所有工作完成。
+为了证明prototype模版并不是被拷贝到实例化的对象中，而是一种链接的方式，请看如下代码：
+复制代码 代码如下:
+
+function Person(name, sex) {
+    this.name = name;
+    this.sex = sex;
+}
+Person.prototype.age = 20;
+var zhang = new Person("ZhangSan", "man");
+console.log(zhang.age); // 20
+// 覆盖prototype中的age属性
+zhang.age = 19;
+console.log(zhang.age); // 19
+delete zhang.age;
+// 在删除实例属性age后，此属性值又从prototype中获取
+console.log(zhang.age); // 20
+在上面的这个例子中，如果他仅仅是通过拷贝得来的，则在删除了这个age这个属性后，这个对象里面将不会存在，但是例子中的age属性还能输出，还是覆盖以前的值，说明我们仅仅是删除了子类中同名的属性，而父类当中的age属性通过一种不可见的链接依然存在在对象中。
+如何在JavaScript中实现简单的继承？
+下面的例子将创建一个雇员类Employee，它从Person继承了原型prototype中的所有属性。
+复制代码 代码如下:
+
+function Employee(name, sex, employeeID) {
+    this.name = name;
+    this.sex = sex;
+    this.employeeID = employeeID;
+}
+// 将Employee的原型指向Person的一个实例
+// 因为Person的实例可以调用Person原型中的方法, 所以Employee的实例也可以调用Person原型中的所有属性。
+Employee.prototype = new Person();
+Employee.prototype.getEmployeeID = function() {
+    return this.employeeID;
+};
+var zhang = new Employee("ZhangSan", "man", "1234");
+console.log(zhang.getName()); // "ZhangSan
+
+好了，以上就是一些关于javascript实现继承的具体过程，和实现继承的方法。
+当然总结一下，javascript中的继承机制仅仅是靠模拟的，于一些面向对象的语言来讲，显的粗糙而且还有一些缺陷，不过总的来讲，这依然不并会降低前端开发者在这方面的热情。
