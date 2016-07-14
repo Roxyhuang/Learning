@@ -4,5 +4,8 @@ Flex 布局教程：语法篇 学习笔记
 
 
 **一、Flex布局是什么？**
+采用Flex布局的元素，称为Flex容器（flex container），简称"容器"。它的所有子元素自动成为容器成员，称为Flex项目（flex item），简称"项目"。
+
+
 
 
