@@ -1,6 +1,8 @@
 Flex 布局教程：语法篇 学习笔记
 --
-> 参考http://www.ruanyifeng.com/blog/2015/07/flex-grammar.html?utm_source=tuicool  
+> 参考:http://www.ruanyifeng.com/blog/2015/07/flex-grammar.html?utm_source=tuicool  
+
+> http://qianduanblog.com/post/css-learning-18-css3-flex-responsive-design-example.html
 
 
 **一、Flex布局是什么？**
