@@ -57,10 +57,7 @@
 	
 	<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 
-</br>
-</br>
-</br>
-</br>
+
 
 **2.HTML5 为什么只需要写 <!DOCTYPE HTML>？**
 
@@ -69,10 +66,6 @@
 
  　　而HTML4.01基于SGML,所以需要对DTD进行引用，才能告知浏览器文档所使用的文档类型。
 
-</br>
-</br>
-</br>
-</br>
 
 **3.行内元素有哪些？块级元素有哪些？ 空(void)元素有那些？**
 
@@ -100,12 +93,6 @@
 
 
 
-</br>
-</br>
-</br>
-</br>
-
-
 **4.页面导入样式时，使用link和@import有什么区别？**
 
 （1）link属于XHTML标签，除了加载CSS外，还能用于定义RSS, 定义rel连接属性等作用；而@import是CSS提供的，只能用于加载CSS;
@@ -114,10 +101,6 @@
 
 （3）import是CSS2.1 提出的，只在IE5以上才能被识别，而link是XHTML标签，无兼容问题;
 
-</br>
-</br>
-</br>
-</br>
 
 
 **5.介绍一下你对浏览器内核的理解？**
@@ -141,10 +124,7 @@ JS引擎则：解析和执行javascript来实现网页的动态效果。
 	Webkit内核：Safari,Chrome等。   [ Chrome的：Blink（WebKit的分支）]
 
 
-</br>
-</br>
-</br>
-</br>
+
 
 **7.html5有哪些新特性、移除了那些元素？如何处理HTML5新标签的浏览器兼容问题？如何区分 HTML 和 HTML5？**
 
@@ -176,10 +156,7 @@ JS引擎则：解析和执行javascript来实现网页的动态效果。
 	* 如何区分HTML5： DOCTYPE声明\新增的结构元素\功能元素
 
 
-</br>
-</br>
-</br>
-</br>
+
 
 **8.简述一下你对HTML语义化的理解？**
 
@@ -189,17 +166,10 @@ JS引擎则：解析和执行javascript来实现网页的动态效果。
 	搜索引擎的爬虫也依赖于HTML标记来确定上下文和各个关键字的权重，利于SEO;
 	使阅读源代码的人对网站更容易将网站分块，便于阅读维护理解。
 
-</br>
-</br>
-</br>
-</br>
+
 
 **9.HTML5的离线储存怎么使用，工作原理能不能解释一下？**
 
-</br>
-</br>
-</br>
-</br>
 
 **10.请描述一下 cookies，sessionStorage 和 localStorage 的区别？**
 
@@ -244,3 +214,13 @@ JS引擎则：解析和执行javascript来实现网页的动态效果。
 		<label for="test1">测试一下：</label>
 		<input id="tess1" autocomplete=off/>
 	  </form>
+
+**14.如何实现浏览器内多个标签页之间的通信? (阿里)**
+
+
+	WebSocket、SharedWorker；
+	也可以调用localstorge、cookies等本地存储方式；
+	
+	localstorge另一个浏览上下文里被添加、修改或删除时，它都会触发一个事件，
+	我们通过监听事件，控制它的值来进行页面信息通信；
+	注意quirks：Safari 在无痕模式下设置localstorge值时会抛出 QuotaExceededError 的异常；
