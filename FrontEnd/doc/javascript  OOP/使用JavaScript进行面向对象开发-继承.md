@@ -2,6 +2,8 @@ JavaScript OOP开发 继承
 --
 > 本文参考：http://www.hubwiz.com/class/574bac8cda97b6e9299d2f04
 
+http://javapolo.iteye.com/blog/1996871
+
 
 **JS继承方式**  
 	

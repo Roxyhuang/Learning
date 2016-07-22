@@ -224,3 +224,54 @@ JS引擎则：解析和执行javascript来实现网页的动态效果。
 	localstorge另一个浏览上下文里被添加、修改或删除时，它都会触发一个事件，
 	我们通过监听事件，控制它的值来进行页面信息通信；
 	注意quirks：Safari 在无痕模式下设置localstorge值时会抛出 QuotaExceededError 的异常；
+
+
+**15.webSocket如何兼容低浏览器？**
+
+
+	Adobe Flash Socket 、
+	ActiveX HTMLFile (IE) 、
+	基于 multipart 编码发送 XHR 、
+	基于长轮询的 XHR
+
+
+**16.页面可见性（Page Visibility API） 可以有哪些用途？**
+
+	通过 visibilityState 的值检测页面当前是否可见，以及打开网页的时间等;
+	在页面被切换到其他后台进程的时候，自动暂停音乐或视频的播放；
+	
+
+**17.如何在页面上实现一个圆形的可点击区域？**		
+
+	
+	1、map+area或者svg
+	2、border-radius
+	3、纯js实现 需要求一个点在不在圆上简单算法、获取鼠标坐标等等
+
+**18.实现不使用 border 画出1px高的线，在不同浏览器的标准模式与怪异模式下都能保持一致的效果。**
+
+
+	<div style="height:1px;overflow:hidden;background:red"></div>
+
+
+**19.网页验证码是干嘛的，是为了解决什么安全问题**。
+
+
+	区分用户是计算机还是人的公共全自动程序。可以防止恶意破解密码、刷票、论坛灌水；
+	有效防止黑客对某一个特定注册用户用特定程序暴力破解方式进行不断的登陆尝试。
+
+
+**20.title与h1的区别、b与strong的区别、i与em的区别？**
+
+
+	title属性没有明确意义只表示是个标题，H1则表示层次明确的标题，对页面信息的抓取也有很大的影响；
+	
+	strong是标明重点内容，有语气加强的含义，使用阅读设备阅读网络时：<strong>会重读，而<B>是展示强调内容。
+	
+	i内容展示为斜体，em表示强调的文本；
+	
+	Physical Style Elements -- 自然样式标签
+	b, i, u, s, pre
+	Semantic Style Elements -- 语义样式标签
+	strong, em, ins, del, code
+	应该准确使用语义样式标签, 但不能滥用, 如果不能确定时首选使用自然样式标签。
