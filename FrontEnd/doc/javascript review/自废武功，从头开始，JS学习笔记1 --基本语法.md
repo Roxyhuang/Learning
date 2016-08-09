@@ -63,5 +63,61 @@ JS几种基本数据类型：
 
 **5、模板字符串：**
 
+es5:
+	
+	var name = '小猴';
+	var age = 25;
+	var message ='你好'+name+',你今年'+age+'岁'//"你好小猴,你今年25岁"
 
 
+es6:
+
+	var name = '小猴';
+	var age = 25;
+	var message = `你好${name},你今年${age}岁`//"你好小猴,你今年25岁"
+
+
+**6、操作字符串：**
+
+	//字符串长度
+	var s = 'Hello'
+	s.length;
+
+	//字符串索引
+	var s = 'Hello,world';
+
+	s[0]; // 'H'
+	s[6]; // ' '
+	s[7]; // 'w'
+	s[12]; // '!'
+	s[13]; // undefined 超出范围的索引不会报错，但一律返回undefined
+
+> 需要特别注意的是，字符串是不可变的，如果对字符串的某个索引赋值，不会有任何错误，但是，也没有任何效果：
+
+	var s = 'Test';
+	s[0] = 'X';
+	alert(s); // s仍然为'Test'
+
+
+> JavaScript为字符串提供了一些常用方法，注意，调用这些方法本身不会改变原有字符串的内容，而是返回一个新字符串：
+
+**(1)toUpperCase**
+
+toUpperCase()把一个字符串全部变为大写：
+
+	var a = `aaaa`;
+	a.toUpperCase();  //"DDASDADA"
+	a  //"ddasdada"
+
+**(2)toLowerCase()**
+
+toLowerCase()把一个字符串全部变为小写：
+
+	var b = `BBBbb`;
+	b.toLowerCase(); //"bbbbb"
+	b //"BBBbb"
+
+
+**(3)indexOf**
+
+indexOf()会搜索指定字符串出现的位置：
