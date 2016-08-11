@@ -1,5 +1,7 @@
 sessionStorage 的一个demo
 --
+>兼容方案https://segmentfault.com/q/1010000003969295
+>http://www.cnblogs.com/jiujiaoyangkang/p/4998518.html
 
 **sessionStorage.html：**
 
