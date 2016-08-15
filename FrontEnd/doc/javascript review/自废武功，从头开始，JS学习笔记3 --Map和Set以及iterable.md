@@ -75,9 +75,112 @@ Set和Map类似，也是一组key的集合，但不存储呢value。由于key不
 	vs.delete(3) //Set {1, 2}
 
 
-三、iterable
+**三、iterable**
 
+
+**(1) for...of循环**
+	
+遍历Array可以采用下标循环，遍历Map和Set就无法使用下标。为了统一集合类型，ES6标准引入了新的iterable类型，Array、Map和Set都属于iterable类型。
+
+具有iterable类型的集合可以通过新的for ... of循环来遍历。
+for ... of循环是ES6引入的新的语法，请测试你的浏览器是否支持：
+
+
+	var a = ['a','b','c'];
+	
+	var b = new Map([[1,'a'],[2,'b'],[3,'c']]);
+	
+	var c = new Set(['a','b','c']);
 	
 
+	//数组
+	for (var i of a){
+	
+	  console.log(i); //a b c
+	
+	}
+	
+	//Map
+	for (var i of b){
+	
+	  console.log(i);  //[1, "a"] [2, "b"] [3, "c"]
+	
+	}
+
+	//Set
+	for (var i of c){
+	
+	  console.log(i); //a b c
+	
+	}
 
 
+**（2）for ... of 和 for ... in 的区别**
+
+for ... in循环将把name包括在内，但Array的length属性却不包括在内。
+
+for ... of循环则完全修复了这些问题，它只循环集合本身的元素：
+
+
+
+
+	
+	var a =['A','B','C'];
+	a.name="123"; 
+
+	// for ... in 
+	for(let i in a){
+	
+	   console.log(i); // "A" "B" "C" "123"
+	}
+
+	// for ... of 
+	for (let i of a){
+	
+	  console.log(i); // "A" "B" "C"
+	
+	}
+
+
+**(3) forEach() 循环 （es 5.1引入)**
+
+　　然而，更好的方式是直接使用iterable内置的forEach方法，它接收一个函数，每次迭代就自动回调该函数。
+	
+Array:
+
+    var a = ["a","b","c"];
+
+	a.forEach(function(element,index,array){
+	
+	  console.log(element); // "a" "b" "c"
+	  console.log(index);   // 0 1 2
+	  console.log(array);   //["a", "b", "c"] *3
+	
+	});
+
+Set:
+Set与Array类似，但Set没有索引，因此回调函数的前两个参数都是元素本身
+
+	var s = new Set(["a","b","c"]);
+
+	s.forEach(function(element,sameElement,set){
+	console.log(element); // "a" "b" "c"
+	console.log(sameElement);  // "a" "b" "c"
+	console.log(set); //Set {"a", "b", "c"}
+	});
+
+Map:
+
+Map的回调函数参数依次为value、key和map本身：
+
+
+	var m = new Map([[1,'x'],[2,'y'],[3,'z']]);
+	
+	m.forEach(function(value,key,map){
+	   console.log(value);  //x y z
+	   console.log(key);    // 1 2 3
+	   console.log(map);    //Map {1 => "x", 2 => "y", 3 => "z"}
+	
+	})
+
+如果对某些参数不感兴趣，由于JavaScript的函数调用不要求参数必须一致，因此可以忽略它们。例如，只需要获得Array的element：
