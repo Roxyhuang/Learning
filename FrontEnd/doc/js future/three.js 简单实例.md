@@ -1,5 +1,7 @@
 three.js 简单实例
 --
+> http://blog.163.com/hongshaoguoguo@126/blog/static/18046981201311310510380/
+
 一、使用的主要流程
 
 **Three.js的六个基本步骤**
