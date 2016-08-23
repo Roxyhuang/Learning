@@ -53,3 +53,57 @@
 **二、闭包**
 
 注意到返回的函数在其定义内部引用了局部变量arr，所以，当一个函数返回了一个函数后，其内部的局部变量还被新函数引用，所以，闭包用起来简单，实现起来可不容易。
+
+另一个需要注意的问题是，返回的函数并没有立刻执行，而是直到调用了f()才执行。我们来看一个例子：
+	
+	function count() {
+	    var arr = [];
+	    for (var i=1; i<=3; i++) {
+	        arr.push(function () {
+	            return i * i;
+	        });
+	    }
+	    return arr;
+	}
+	
+	var results = count();
+	var f1 = results[0];
+	var f2 = results[1];
+	var f3 = results[2];
+
+	f1(); // 16
+	f2(); // 16
+	f3(); // 16
+
+
+可以这样写：
+
+
+	function count() {
+	    var arr = [];
+	    for (var i=1; i<=3; i++) {
+	        arr.push((function (n) {
+	            return function () {
+	                return n * n;
+	            }
+	        })(i));
+	    }
+	    return arr;
+	}
+	
+	var results = count();
+	var f1 = results[0];
+	var f2 = results[1];
+	var f3 = results[2];
+	
+	f1(); // 1
+	f2(); // 4
+	f3(); // 9
+
+
+
+通常，一个立即执行的匿名函数可以把函数体拆开，一般这么写：
+
+	(function (x) {
+	    return x * x;
+	})(3);
