@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+        <input  id="keyword"/>
+        <button id="search" onclick="search()">查询</button>
+        <div>
+            <span class="text">一、关键字1</span>
+            <span class="text">二、关键字2</span>
+            <span class="text">三、关键字3</span>
+        </div>
+</body>
+<script>
+    /**
+     * 搜索关键词Demo
+     * Neo_Huang
+     */
+    var search =function (){
+           var keyWord = document.getElementById("keyword").value;
+           var allDom =  document.querySelectorAll(".text");
+
+           for(var i of allDom){
+              var allSpan = i.getElementsByTagName('span');
+              for(var x of allSpan){
+                   x.style.background = "#fff";
+               }
+              var text =  i.innerText.indexOf(keyWord);
+              if(text!=-1){
+                  var keyWord_new = '<span style="background-color:red">'+keyWord+'</span>';
+                  var html = i.innerText.replace(keyWord,keyWord_new);
+                  var span_new = document.createElement("span");
+                  var html_new  = span_new.innerHTML=html;
+                  i.innerHTML = html_new;
+              }
+           }
+       }
+</script>
+</html>
